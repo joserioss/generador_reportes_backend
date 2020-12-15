@@ -19,52 +19,51 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import cl.jrios.exception.ModelNotFoundException;
-import cl.jrios.model.Vehicle;
-import cl.jrios.service.IVehicleService;
+import cl.jrios.model.Repairman;
+import cl.jrios.service.IRepairmanService;
 
 @RestController
-@RequestMapping("/vehicles")
-public class VehicleController {
+@RequestMapping("/repairmen")
+public class RepairmanController {
 	
 	@Autowired
-	private IVehicleService service;
+	private IRepairmanService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Vehicle>> listar(){
-		List<Vehicle> lista = service.listar();
-		return new ResponseEntity<List<Vehicle>>(lista, HttpStatus.OK);
+	public ResponseEntity<List<Repairman>> listar(){
+		List<Repairman> lista = service.listar();
+		return new ResponseEntity<List<Repairman>>(lista, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Vehicle> listarPorId(@PathVariable("id") Integer id){
-		Vehicle obj = service.leerPorId(id);
-		if(obj.getIdVehicle() == null) {
+	public ResponseEntity<Repairman> listarPorId(@PathVariable("id") Integer id){
+		Repairman obj = service.leerPorId(id);
+		if(obj.getIdRepairman() == null) {
 			throw new ModelNotFoundException("ID no encontrado" + id);
 		}
-		return new ResponseEntity<Vehicle>(obj, HttpStatus.OK);
+		return new ResponseEntity<Repairman>(obj, HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody Vehicle vehicle){
-		service.registrar(vehicle);
-		URI location =  ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(vehicle.getIdVehicle()).toUri();
+	public ResponseEntity<Object> registrar(@Valid @RequestBody Repairman repairman){
+		service.registrar(repairman);
+		URI location =  ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(repairman.getIdRepairman()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping
-	public ResponseEntity<Vehicle> modificar(@Valid @RequestBody Vehicle vehicle){
-		Vehicle obj = service.modificar(vehicle);
-		return new ResponseEntity<Vehicle>(obj, HttpStatus.OK);
+	public ResponseEntity<Repairman> modificar(@Valid @RequestBody Repairman repairman){
+		Repairman obj = service.modificar(repairman);
+		return new ResponseEntity<Repairman>(obj, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id){
-		Vehicle obj = service.leerPorId(id);
-		if(obj.getIdVehicle() == null) {
+		Repairman obj = service.leerPorId(id);
+		if(obj.getIdRepairman() == null) {
 			throw new ModelNotFoundException("ID no encontrado" + id);
 		}
 		service.eliminar(id);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
-	
 }

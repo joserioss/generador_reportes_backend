@@ -13,22 +13,35 @@ public class Vehicle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer idVehicle;
 
-	@Column(name = "serie", nullable = false, length = 6)
+	@Column(name = "equipment", nullable = false, length = 7)
+	private String equipment;
+	
+	@Column(name = "serie", length = 10)
 	private String serie;
+	
+	@Column(name = "ot")
+	private Integer ot;
 
 	@Column(name = "hours", nullable = false)
 	private Integer hours;
 
-	@Column(name = "mark", nullable = false, length = 10)
-	private String mark;
+	public Integer getIdVehicle() {
+		return idVehicle;
+	}
 
-	@Column(name = "description", nullable = false, length = 70)
-	private String Description;
+	public void setIdVehicle(Integer idVehicle) {
+		this.idVehicle = idVehicle;
+	}
 
-	@Column(name = "photo", nullable = true)
-	private String photo;
+	public String getEquipment() {
+		return equipment;
+	}
+
+	public void setEquipment(String equipment) {
+		this.equipment = equipment;
+	}
 
 	public String getSerie() {
 		return serie;
@@ -38,6 +51,14 @@ public class Vehicle {
 		this.serie = serie;
 	}
 
+	public Integer getOt() {
+		return ot;
+	}
+
+	public void setOt(Integer ot) {
+		this.ot = ot;
+	}
+
 	public Integer getHours() {
 		return hours;
 	}
@@ -45,37 +66,5 @@ public class Vehicle {
 	public void setHours(Integer hours) {
 		this.hours = hours;
 	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getMark() {
-		return mark;
-	}
-
-	public void setMark(String mark) {
-		this.mark = mark;
-	}
-
-	public String getDescription() {
-		return Description;
-	}
-
-	public void setDescription(String description) {
-		Description = description;
-	}
-
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
+	
 }
