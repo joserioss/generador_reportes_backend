@@ -25,9 +25,6 @@ public class WorkdoneServiceImpl implements IWorkdoneService {
 
 	@Override
 	public Workdone registrar(Workdone obj) {
-		obj.getDetailWorkdone().forEach(detail -> {
-			detail.setWorkdone(obj);
-		});
 		return repo.save(obj);
 	}
 
@@ -53,6 +50,12 @@ public class WorkdoneServiceImpl implements IWorkdoneService {
 		return true;
 	}
 
+	@Override
+	public boolean eliminarTodos() {
+		repo.deleteAll();
+		return true;
+	}
+	
 	@Override
 	public byte[] generarReporte(Integer id) {
 		byte[] data = null;

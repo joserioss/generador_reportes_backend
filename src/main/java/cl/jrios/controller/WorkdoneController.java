@@ -44,13 +44,10 @@ public class WorkdoneController {
 		return new ResponseEntity<List<Workdone>>(lista, HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Workdone> listarPorId(@PathVariable("id") Integer id){
-		Workdone obj = service.leerPorId(id);
-		if(obj.getIdWorkdone() == null) {
-			throw new ModelNotFoundException("ID no encontrado" + id);
-		}
-		return new ResponseEntity<Workdone>(obj, HttpStatus.OK);
+	@GetMapping("/deleteAll")
+	public ResponseEntity<Object> eliminarTodos(){
+		service.eliminarTodos();
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
 	@PostMapping
